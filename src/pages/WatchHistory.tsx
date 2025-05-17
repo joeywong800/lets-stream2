@@ -193,9 +193,9 @@ const WatchHistory = () => {
               {activeTab === 'favorites' && <Heart className="h-6 w-6 mr-3 text-accent" />}
               {activeTab === 'watchlist' && <Bookmark className="h-6 w-6 mr-3 text-accent" />}
               <h1 className="text-2xl font-bold text-white">
-                {activeTab === 'history' && 'Your Watch History'}
-                {activeTab === 'favorites' && 'Your Favorites'}
-                {activeTab === 'watchlist' && 'Your Watchlist'}
+                {activeTab === 'history' && 'Continuar Assistir'}
+                {activeTab === 'favorites' && 'Favoritos'}
+                {activeTab === 'watchlist' && 'Minha Lista'}
               </h1>
             </div>
             
@@ -208,7 +208,7 @@ const WatchHistory = () => {
                   className="border-white/20 bg-black/50 text-white hover:bg-black/70"
                 >
                   <Clock className="h-4 w-4 mr-2" />
-                  {sortOrder === 'newest' ? 'Newest First' : 'Oldest First'}
+                  {sortOrder === 'newest' ? 'Recentes' : 'Antigos'}
                 </Button>
               )}
               
@@ -220,7 +220,7 @@ const WatchHistory = () => {
                   className="border-white/20 bg-black/50 text-white hover:bg-black/70"
                 >
                   <Trash2 className="h-4 w-4 mr-2" />
-                  Clear History
+                  Apagar Histórico 
                 </Button>
               )}
             </div>
@@ -230,15 +230,15 @@ const WatchHistory = () => {
             <TabsList className="grid grid-cols-3 mb-4 bg-black/20 border border-white/10">
               <TabsTrigger value="history" className="data-[state=active]:bg-accent">
                 <History className="h-4 w-4 mr-2" />
-                History
+                Histórico 
               </TabsTrigger>
               <TabsTrigger value="favorites" className="data-[state=active]:bg-accent">
                 <Heart className="h-4 w-4 mr-2" />
-                Favorites
+                Favoritos
               </TabsTrigger>
               <TabsTrigger value="watchlist" className="data-[state=active]:bg-accent">
                 <Bookmark className="h-4 w-4 mr-2" />
-                Watchlist
+                Minha Lista
               </TabsTrigger>
             </TabsList>
             
@@ -264,12 +264,12 @@ const WatchHistory = () => {
               ) : (
                 <div className="glass p-8 rounded-lg text-center">
                   <History className="h-12 w-12 mx-auto mb-4 text-white/50" />
-                  <h3 className="text-lg font-medium text-white mb-2">No watch history yet</h3>
+                  <h3 className="text-lg font-medium text-white mb-2">Ainda não assistis-te a nada !</h3>
                   <p className="text-white/70 mb-4">
-                    Start watching movies and shows to build your history.
+                   Comece a ver filmes e séries & Animes para construir o teu histórico.
                   </p>
                   <Button onClick={() => navigate('/')}>
-                    Browse Content
+                    Descobrir conteúdo
                   </Button>
                 </div>
               )}
@@ -287,9 +287,9 @@ const WatchHistory = () => {
               ) : (
                 <div className="glass p-8 rounded-lg text-center">
                   <Heart className="h-12 w-12 mx-auto mb-4 text-white/50" />
-                  <h3 className="text-lg font-medium text-white mb-2">No favorites yet</h3>
+                  <h3 className="text-lg font-medium text-white mb-2">Sem favoritos ainda !</h3>
                   <p className="text-white/70 mb-4">
-                    Add movies and shows to your favorites for quick access.
+                    Adicione filmes e séries & Animes aos teus favoritos.
                   </p>
                   <Button onClick={() => navigate('/')}>
                     Browse Content
@@ -310,9 +310,9 @@ const WatchHistory = () => {
               ) : (
                 <div className="glass p-8 rounded-lg text-center">
                   <Bookmark className="h-12 w-12 mx-auto mb-4 text-white/50" />
-                  <h3 className="text-lg font-medium text-white mb-2">Your watchlist is empty</h3>
+                  <h3 className="text-lg font-medium text-white mb-2">A tua lista está vazia !</h3>
                   <p className="text-white/70 mb-4">
-                    Add movies and shows to your watchlist to watch later.
+                    Adicione filmes e séries & Animes à tua lista para ver mais tarde.
                   </p>
                   <Button onClick={() => navigate('/')}>
                     Browse Content

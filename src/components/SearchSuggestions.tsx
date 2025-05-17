@@ -74,7 +74,7 @@ const SearchSuggestions = ({
             onClick={onViewAllResults}
             className="w-full px-4 py-2 text-left text-sm text-accent hover:bg-white/10 transition-colors"
           >
-            View all results for "{searchQuery}"
+            Ver tudo "{searchQuery}"
           </button>
         </div>
       )}

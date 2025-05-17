@@ -53,7 +53,7 @@ const UserMenu = ({ mobile = false, onAction }: UserMenuProps) => {
             <User className="h-5 w-5 text-white" />
           </div>
           <div className="text-left">
-            <div className="font-medium">{user?.displayName || 'User'}</div>
+            <div className="font-medium">{user?.displayName || 'Olá!'}</div>
             <div className="text-xs text-white/60">{user?.email}</div>
           </div>
         </Link>
@@ -64,7 +64,7 @@ const UserMenu = ({ mobile = false, onAction }: UserMenuProps) => {
           onClick={handleSignOut}
         >
           <LogOut className="mr-2 h-4 w-4" />
-          Sign Out
+          Sair
         </Button>
       </div>
     );
@@ -85,7 +85,7 @@ const UserMenu = ({ mobile = false, onAction }: UserMenuProps) => {
             <User className="h-5 w-5 text-white" />
           </div>
           <div className="text-left">
-            <div className="font-medium">{user?.displayName || 'User'}</div>
+            <div className="font-medium">{user?.displayName || 'Olá!'}</div>
             <div className="text-xs text-white/60">{user?.email}</div>
           </div>
         </div>
@@ -95,21 +95,21 @@ const UserMenu = ({ mobile = false, onAction }: UserMenuProps) => {
         <DropdownMenuItem asChild className="cursor-pointer h-9">
           <Link to="/profile" className="flex items-center" onClick={() => { setIsOpen(false); if (onAction) onAction(); }}>
             <User className="mr-2 h-4 w-4" />
-            <span>My Profile</span>
+            <span>Perfil</span>
           </Link>
         </DropdownMenuItem>
         
         <DropdownMenuItem asChild className="cursor-pointer h-9">
           <Link to="/watch-history" className="flex items-center" onClick={() => { setIsOpen(false); if (onAction) onAction(); }}>
             <History className="mr-2 h-4 w-4" />
-            <span>Watch History</span>
+            <span>Continuar Assistir</span>
           </Link>
         </DropdownMenuItem>
         
         <DropdownMenuItem asChild className="cursor-pointer h-9">
           <Link to="/profile" className="flex items-center" onClick={() => { setIsOpen(false); if (onAction) onAction(); }}>
             <Settings className="mr-2 h-4 w-4" />
-            <span>Settings</span>
+            <span>Definições</span>
           </Link>
         </DropdownMenuItem>
         
@@ -120,7 +120,7 @@ const UserMenu = ({ mobile = false, onAction }: UserMenuProps) => {
           onClick={handleSignOut}
         >
           <LogOut className="mr-2 h-4 w-4" />
-          <span>Sign Out</span>
+          <span>Sair</span>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

@@ -108,11 +108,11 @@ const Index = () => {
 
           <div className={`mt-8 md:mt-12 transition-opacity duration-300 ${contentVisible ? 'opacity-100' : 'opacity-0'}`}>
             {user && <ContinueWatching />}
-            <ContentRow title="Trending Now" media={trendingMedia} featured />
-            <ContentRow title="Popular Movies" media={popularMovies} />
+            <ContentRow title="🔥 Em alta hoje" media={trendingMedia} featured />
+           {/* <ContentRow title="Popular Movies" media={popularMovies} />
             <ContentRow title="Popular TV Shows" media={popularTVShows} />
             <ContentRow title="Top Rated Movies" media={topRatedMovies} />
-            <ContentRow title="Top Rated TV Shows" media={topRatedTVShows} />
+            <ContentRow title="Top Rated TV Shows" media={topRatedTVShows} /> `/}
             
             {/* Lazy load secondary content */}
             {secondaryLoaded && (

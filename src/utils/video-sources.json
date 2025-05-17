@@ -1,10 +1,10 @@
 {
   "videoSources": [
     {
-      "key": "vidlink",
-      "name": "VidLink",
-      "movieUrlPattern": "https://vidlink.pro/movie/{id}?autoplay=true&title=true",
-      "tvUrlPattern": "https://vidlink.pro/tv/{id}/{season}/{episode}?autoplay=true&title=true"
+      "key": "vidCO",
+      "name": "VidCO",
+      "movieUrlPattern": "https://player.vidsrc.co/embed/movie/{id}?autoplay=true&title=true",
+      "tvUrlPattern": "https://player.vidsrc.co/embed/tv/{id}/{season}/{episode}?autoplay=true&title=true"
     },
     {
       "key": "autoembed",
@@ -13,10 +13,10 @@
       "tvUrlPattern": "https://player.autoembed.cc/embed/tv/{id}/{season}/{episode}?autoplay=true"
     },
     {
-      "key": "2embed",
-      "name": "2Embed",
-      "movieUrlPattern": "https://www.2embed.cc/embed/{id}",
-      "tvUrlPattern": "https://www.2embed.cc/embed/tv/{id}&s={season}&e={episode}"
+      "key": "VidLink",
+      "name": "VidLink",
+      "movieUrlPattern": "https://vidlink.pro/movie/{id}?autoplay=true&title=true",
+      "tvUrlPattern": "https://vidlink.pro/tv/{id}/{season}/{episode}?autoplay=true&title=true"
     },
     {
       "key": "multiembed",

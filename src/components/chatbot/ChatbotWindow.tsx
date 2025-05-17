@@ -60,7 +60,7 @@ const ChatbotWindow: React.FC = () => {
       <CardHeader className="pb-2 border-b border-border/10">
         <div className="flex justify-between items-center">
           <CardTitle className="text-xl font-semibold bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent">
-            CineMate
+          Bad Bot.
           </CardTitle>
           <Button 
             variant="ghost" 
@@ -76,20 +76,20 @@ const ChatbotWindow: React.FC = () => {
       <CardContent className="flex-1 overflow-y-auto p-4 scrollbar-thin scrollbar-thumb-primary/10 scrollbar-track-transparent">
         {messages.length === 0 ? (
           <div className="h-full flex flex-col items-center justify-center text-center space-y-4 px-2">
-            <div className="space-y-2">
-              <p className="text-lg font-semibold text-primary">Welcome to CineMate! 🎬</p>
-              <p className="text-sm text-muted-foreground">I can recommend movies and TV shows tailored to your tastes, or help you discover something new.</p>
-            </div>
+             {/*<div className="space-y-2">
+              <p className="text-lg font-semibold text-primary">Welcome to CineMate! 🎬</p> 
+           <p className="text-sm text-muted-foreground">Posso recomendar filmes e séries $ animes adaptados ao teu gosto ou ajudar-te a descobrir algo novo.</p>
+            </div>*/}
             
             <div className="w-full space-y-2">
-              <p className="text-sm font-medium">What I can help you with:</p>
+              <p className="text-sm font-medium">Com o que te posso ajudar:</p>
               <ul className="text-left text-sm list-none space-y-2">
                 {[
-                  "Get instant recommendations based on your mood",
-                  "Search trending, top-rated, or new releases",
-                  "Add movies to your watchlist for later",
-                  "Track your watch history",
-                  "Advanced search by genre, rating, or year"
+                  "Recomendações na base do humor",
+                  "Pesquisa por Tendências e lançamentos",
+                  "Adiciona filmes e séries a tua lista pra assistir depois",
+                  "Acompanha o teu histórico de assistir",
+                  "Pesquisas avançadas: Ano, Gênero e Classificação"
                 ].map((item, i) => (
                   <li key={i} className="flex items-center space-x-2 text-muted-foreground">
                     <div className="h-1.5 w-1.5 rounded-full bg-primary/60" />
@@ -100,12 +100,12 @@ const ChatbotWindow: React.FC = () => {
             </div>
 
             <div className="space-y-2">
-              <p className="text-sm font-medium">Try saying:</p>
+              <p className="text-sm font-medium">Exemplos:</p>
               <div className="space-y-1.5">
                 {[
-                  "Suggest a feel-good comedy for the weekend",
-                  "Show me trending sci-fi movies",
-                  "Add Inception to my watchlist"
+                  "Sugere-me um filme de comédia para o fim de semana",
+                  "Mostra me os filmes mais assistidos da semana",
+                  "Quero assistir filmes de adolescentes dos 2000"
                 ].map((text, i) => (
                   <p key={i} className="text-xs italic text-muted-foreground bg-muted/40 px-3 py-1.5 rounded-lg">
                     "{text}"
@@ -125,7 +125,7 @@ const ChatbotWindow: React.FC = () => {
       </CardContent>
       
       <CardFooter className="border-t border-border/10 p-4">
-        <form onSubmit={handleSubmit} className="flex w-full items-center space-x-2">
+         <form onSubmit={handleSubmit} className="flex w-full items-center space-x-2">
           <Button 
             type="button" 
             variant="ghost" 
@@ -136,12 +136,12 @@ const ChatbotWindow: React.FC = () => {
               isSearchMode ? "text-primary bg-primary/10" : "hover:bg-primary/10"
             )}
           >
-            <Search className="h-4 w-4" />
+            
           </Button>
           
-          <Input
+         <Input
             ref={inputRef}
-            placeholder={isSearchMode ? "Search for movies or shows..." : "Ask for recommendations..."}
+            placeholder={isSearchMode ? "Search for movies or shows..." : "Escreve aqui"}
             value={input}
             onChange={(e) => setInput(e.target.value)}
             className={cn(

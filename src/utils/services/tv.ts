@@ -5,34 +5,41 @@ import { TMDBTVResult, TMDBTVDetailsResult } from '../types/tmdb';
 import { formatMediaResult } from './media';
 import { TMDB } from '../config/constants';
 
+const LANGUAGE = 'pt-BR';
+
 export async function getTVShow(id: number): Promise<TVDetails> {
-  const response = await tmdb.get<TMDBTVDetailsResult>(`/tv/${id}`);
+  const response = await tmdb.get<TMDBTVDetailsResult>(`/tv/${id}`, {
+    params: { language: LANGUAGE }
+  });
   return formatTVDetails(response.data);
 }
 
 export async function getPopularTVShows(page = 1): Promise<Media[]> {
   const response = await tmdb.get<{ results: TMDBTVResult[] }>('/tv/popular', {
-    params: { page }
+    params: { page, language: LANGUAGE }
   });
   return response.data.results.map(formatMediaResult);
 }
 
 export async function getTopRatedTVShows(page = 1): Promise<Media[]> {
   const response = await tmdb.get<{ results: TMDBTVResult[] }>('/tv/top_rated', {
-    params: { page }
+    params: { page, language: LANGUAGE }
   });
   return response.data.results.map(formatMediaResult);
 }
 
 export async function getTrendingTVShows(timeWindow: 'day' | 'week' = 'week', page = 1): Promise<Media[]> {
   const response = await tmdb.get<{ results: TMDBTVResult[] }>(`/trending/tv/${timeWindow}`, {
-    params: { page }
+    params: { page, language: LANGUAGE }
   });
   return response.data.results.map(formatMediaResult);
 }
 
 export async function getTVEpisode(id: number, season: number, episode: number): Promise<Episode> {
-  const response = await tmdb.get<TVEpisodeResult>(`/tv/${id}/season/${season}/episode/${episode}`);
+  const response = await tmdb.get<TVEpisodeResult>(
+    `/tv/${id}/season/${season}/episode/${episode}`,
+    { params: { language: LANGUAGE } }
+  );
   return {
     id: response.data.id,
     name: response.data.name,
@@ -45,11 +52,12 @@ export async function getTVEpisode(id: number, season: number, episode: number):
   };
 }
 
-// Get TV show recommendations
 export async function getTVRecommendations(id: number): Promise<Media[]> {
   try {
-    const response = await tmdb.get<{ results: TMDBTVResult[] }>(`/tv/${id}/recommendations`);
-    return response.data.results.map(item => formatMediaResult({...item, media_type: 'tv'}));
+    const response = await tmdb.get<{ results: TMDBTVResult[] }>(`/tv/${id}/recommendations`, {
+      params: { language: LANGUAGE }
+    });
+    return response.data.results.map(item => formatMediaResult({ ...item, media_type: 'tv' }));
   } catch (error) {
     console.error('Error fetching TV recommendations:', error);
     return [];
@@ -67,17 +75,21 @@ interface TVEpisodeResult {
   vote_average: number;
 }
 
-// Get TV show details
 export async function getTVDetails(id: number): Promise<TVDetails | null> {
   try {
     const [detailsResponse, imagesResponse] = await Promise.all([
-      tmdb.get<TMDBTVDetailsResult>(`/tv/${id}?append_to_response=content_ratings`),
+      tmdb.get<TMDBTVDetailsResult>(`/tv/${id}`, {
+        params: {
+          append_to_response: 'content_ratings',
+          language: LANGUAGE
+        }
+      }),
       tmdb.get<MovieImagesResponse>(`/tv/${id}/images`)
     ]);
-    
+
     const detailsData = detailsResponse.data;
     const imagesData = imagesResponse.data;
-    
+
     let certification = "";
     if (detailsData.content_ratings && detailsData.content_ratings.results) {
       const usRating = detailsData.content_ratings?.results.find((country) => country.iso_3166_1 === "US");
@@ -90,18 +102,17 @@ export async function getTVDetails(id: number): Promise<TVDetails | null> {
     if (imagesData.logos && imagesData.logos.length > 0) {
       const englishLogos = imagesData.logos.filter(logo => logo.iso_639_1 === "en");
       if (englishLogos.length > 0) {
-        bestLogo = englishLogos.reduce((prev, current) => 
+        bestLogo = englishLogos.reduce((prev, current) =>
           (prev.vote_average > current.vote_average) ? prev : current
         );
       }
     }
-    
-    // Ensure all required properties are present, and fall back to sensible defaults when needed
-    const formattedData = formatMediaResult({...detailsData, media_type: 'tv'});
-    
+
+    const formattedData = formatMediaResult({ ...detailsData, media_type: 'tv' });
+
     return {
       ...formattedData,
-      name: formattedData.name || detailsData.name || 'Unknown TV Show',
+      name: formattedData.name || detailsData.name || 'Série Desconhecida',
       first_air_date: formattedData.first_air_date || detailsData.first_air_date || '',
       episode_run_time: detailsData.episode_run_time || [],
       genres: detailsData.genres || [],
@@ -120,10 +131,11 @@ export async function getTVDetails(id: number): Promise<TVDetails | null> {
   }
 }
 
-// Validate TMDB TV ID
 export async function validateTVId(tmdbId: number): Promise<boolean> {
   try {
-    const response = await tmdb.get(`/tv/${tmdbId}`);
+    const response = await tmdb.get(`/tv/${tmdbId}`, {
+      params: { language: LANGUAGE }
+    });
     return response.data && response.data.id === tmdbId;
   } catch (error) {
     return false;
@@ -131,11 +143,11 @@ export async function validateTVId(tmdbId: number): Promise<boolean> {
 }
 
 function formatTVDetails(show: TMDBTVDetailsResult): TVDetails {
-  const formattedData = formatMediaResult({...show, media_type: 'tv'});
-  
+  const formattedData = formatMediaResult({ ...show, media_type: 'tv' });
+
   return {
     ...formattedData,
-    name: show.name || 'Unknown TV Show',
+    name: show.name || 'Série Desconhecida',
     first_air_date: show.first_air_date || '',
     episode_run_time: show.episode_run_time || [],
     genres: show.genres || [],
@@ -145,18 +157,17 @@ function formatTVDetails(show: TMDBTVDetailsResult): TVDetails {
     number_of_seasons: show.number_of_seasons || 0,
     seasons: show.seasons || [],
     production_companies: show.production_companies || [],
-    certification: '',  // Set by parent function after content ratings lookup
-    logo_path: null,  // Set by parent function after image lookup
+    certification: '',
+    logo_path: null,
   };
 }
 
-// Get TV show season details
-export async function getSeasonDetails(
-  id: number,
-  seasonNumber: number
-): Promise<Episode[]> {
+export async function getSeasonDetails(id: number, seasonNumber: number): Promise<Episode[]> {
   try {
-    const response = await tmdb.get<{ episodes: Episode[] }>(`/tv/${id}/season/${seasonNumber}`);
+    const response = await tmdb.get<{ episodes: Episode[] }>(
+      `/tv/${id}/season/${seasonNumber}`,
+      { params: { language: LANGUAGE } }
+    );
     return response.data.episodes;
   } catch (error) {
     console.error(`Error fetching season ${seasonNumber} for TV show ${id}:`, error);

@@ -8,7 +8,7 @@ interface TVShowCastProps {
 export const TVShowCast = ({ cast }: TVShowCastProps) => {
   return (
     <div className="mb-8">
-      <h2 className="text-2xl font-bold text-white mb-6">Cast</h2>
+      <h2 className="text-2xl font-bold text-white mb-6">Elenco</h2>
       {cast.length > 0 ? (
         <div className="flex flex-wrap gap-6">
           {cast.map((member) => (

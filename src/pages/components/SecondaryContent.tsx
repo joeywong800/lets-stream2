@@ -18,7 +18,7 @@ import {
 } from '@/utils/api';
 
 const SecondaryContent = () => {
-  const [bollywoodMovies, setBollywoodMovies] = useState<Media[]>([]);
+ const [bollywoodMovies, setBollywoodMovies] = useState<Media[]>([]);
   const [actionMovies, setActionMovies] = useState<Media[]>([]);
   const [dramaMovies, setDramaMovies] = useState<Media[]>([]);
   const [netflixContent, setNetflixContent] = useState<Media[]>([]);
@@ -96,9 +96,9 @@ const SecondaryContent = () => {
   return (
     <>
       {/* Genre-based content */}
-      {bollywoodMovies.length > 0 && <ContentRow title="Bollywood" media={bollywoodMovies} />}
+     {/*{bollywoodMovies.length > 0 && <ContentRow title="Bollywood" media={bollywoodMovies} />}
       {actionMovies.length > 0 && <ContentRow title="Action" media={actionMovies} />}
-      {dramaMovies.length > 0 && <ContentRow title="Drama" media={dramaMovies} />}
+      {dramaMovies.length > 0 && <ContentRow title="Drama" media={dramaMovies} />}*/}
       
       {/* Platform-specific content */}
       {netflixContent.length > 0 && <ContentRow title="Netflix" media={netflixContent} />}

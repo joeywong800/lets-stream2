@@ -19,10 +19,10 @@ const Logo = () => {
         
         <div className="flex items-baseline logo-container">
           <span className="text-2xl font-extrabold bg-gradient-to-tr from-red-400 via-pink-500 to-purple-500 bg-clip-text text-transparent animate-gradient bg-300% tracking-tight logo-float">
-            Let's
+            BADBOYS
           </span>
           <span className="text-2xl font-extrabold ml-2 bg-gradient-to-br from-blue-400 via-teal-400 to-emerald-500 bg-clip-text text-transparent animate-gradient bg-300% tracking-tight logo-breathe">
-            Stream
+            FLIX
           </span>
           <div className="logo-shimmer absolute inset-0"></div>
         </div>

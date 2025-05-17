@@ -137,7 +137,7 @@ const Profile = () => {
                   onClick={handleSignOut}
                   className="border-white/20 bg-black/50 text-white hover:bg-black/70"
                 >
-                  Sign Out
+                  Terminar Sessão
                 </Button>
               </div>
             </div>
@@ -148,17 +148,17 @@ const Profile = () => {
           <TabsList className="bg-background border border-white/10">
             <TabsTrigger value="history" className="data-[state=active]:bg-accent">
               <History className="h-4 w-4 mr-2" />
-              Watch History
+              Continuar Assistir
             </TabsTrigger>
             <TabsTrigger value="preferences" className="data-[state=active]:bg-accent">
               <Settings className="h-4 w-4 mr-2" />
-              Preferences
+              Preferências
             </TabsTrigger>
           </TabsList>
           
           <TabsContent value="history" className="pt-4">
             <div className="flex justify-between items-center mb-4">
-              <h2 className="text-xl font-semibold text-white">Your Watch History</h2>
+              <h2 className="text-xl font-semibold text-white">Histórico </h2>
               
               {watchHistory.length > 0 && (
                 <Button 
@@ -167,7 +167,7 @@ const Profile = () => {
                   onClick={handleClearHistory}
                   className="border-white/20 bg-black/50 text-white hover:bg-black/70"
                 >
-                  Clear History
+                  Limpar Histórico
                 </Button>
               )}
             </div>
@@ -187,12 +187,12 @@ const Profile = () => {
             ) : (
               <div className="glass p-8 rounded-lg text-center">
                 <History className="h-12 w-12 mx-auto mb-4 text-white/50" />
-                <h3 className="text-lg font-medium text-white mb-2">No watch history yet</h3>
+                <h3 className="text-lg font-medium text-white mb-2">Ainda não assistis-te a nada !</h3>
                 <p className="text-white/70 mb-4">
-                  Start watching movies and shows to build your history.
+                  Comece a ver filmes e séries & Animes para construir o teu histórico.
                 </p>
                 <Button onClick={() => navigate('/')}>
-                  Browse Content
+                  Descobrir conteúdo
                 </Button>
               </div>
             )}
@@ -200,16 +200,16 @@ const Profile = () => {
           
           <TabsContent value="preferences" className="pt-4">
             <div className="glass p-6 rounded-lg">
-              <h2 className="text-xl font-semibold text-white mb-4">Your Preferences</h2>
+              <h2 className="text-xl font-semibold text-white mb-4">As tuas Preferências</h2>
               
               <div className="space-y-6">
                 <div className="flex items-center justify-between">
                   <div className="space-y-0.5">
-                    <h3 className="text-lg font-medium text-white">Watch History</h3>
+                    <h3 className="text-lg font-medium text-white">Histórico De Assistir</h3>
                     <p className="text-sm text-white/70">
                       {userPreferences?.isWatchHistoryEnabled
-                        ? "Your watch history is being recorded"
-                        : "Your watch history is not being recorded"}
+                        ? "O teu histórico está a ser guardado"
+                        : "O teu histórico não está a ser guardado"}
                     </p>
                   </div>
                   <Switch
@@ -224,16 +224,16 @@ const Profile = () => {
                 
                 {/* Video Source Preference */}
                 <div className="space-y-2">
-                  <h3 className="text-lg font-medium text-white">Preferred Video Source</h3>
+                  <h3 className="text-lg font-medium text-white">Fonte de vídeo preferida</h3>
                   <p className="text-sm text-white/70">
-                    Select your default video source for movies and TV shows
+                    Selecione a tua fonte de vídeo predefinida para filmes e séries & Animes
                   </p>
                   <Select 
                     value={userPreferences?.preferred_source || ''} 
                     onValueChange={(value) => updatePreferences({ preferred_source: value })}
                   >
                     <SelectTrigger className="w-full sm:w-[200px] bg-white/10 border-white/20 text-white">
-                      <SelectValue placeholder="Select source" />
+                      <SelectValue placeholder="Selecionar fonte" />
                     </SelectTrigger>
                     <SelectContent className="bg-background border-white/10">
                       {videoSources.map(source => (
@@ -255,7 +255,9 @@ const Profile = () => {
                 </div>
 
                 {/* Feature Notifications Toggle */}
-                <div className="flex items-center justify-between">
+                <div className="flex items-center justify-between"
+                style={{ display: 'none' }}
+                >
                   <div className="space-y-0.5">
                     <h3 className="text-lg font-medium">Feature Notifications</h3>
                     <p className="text-sm text-white/70">

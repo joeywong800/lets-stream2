@@ -87,10 +87,10 @@ const VideoSourceSelector = ({
                   className="text-xs text-accent flex items-center gap-1"
                 >
                   <Check className="h-3 w-3" />
-                  Active
+                  Ativo
                 </motion.div>
               ) : (
-                <span className="text-xs text-white/40">Click to switch</span>
+                <span className="text-xs text-white/40">Clica para selecionar</span>
               )}
             </div>
           </div>

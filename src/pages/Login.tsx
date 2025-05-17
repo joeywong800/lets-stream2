@@ -44,8 +44,8 @@ export default function Login() {
     <div className="min-h-screen flex items-center justify-center bg-background px-4">
       <Card className="w-full max-w-md">
         <CardHeader className="space-y-1 text-center">
-          <CardTitle className="text-2xl font-bold">Welcome back</CardTitle>
-          <CardDescription>Sign in to your account to continue</CardDescription>
+          <CardTitle className="text-2xl font-bold">Ahoi !</CardTitle>
+          <CardDescription>Inicia sessão para continuar</CardDescription>
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-4">
@@ -54,7 +54,7 @@ export default function Login() {
               <Input
                 id="email"
                 type="email"
-                placeholder="Enter your email"
+                placeholder="Escreve o teu email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
@@ -65,14 +65,14 @@ export default function Login() {
               <Input
                 id="password"
                 type="password"
-                placeholder="Enter your password"
+                placeholder="Escreve a tua password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
               />
             </div>
             <Button type="submit" className="w-full" disabled={isLoading}>
-              {isLoading ? 'Signing in...' : 'Sign in'}
+              {isLoading ? 'A entrar...' : 'Entrar'}
             </Button>
           </form>
 
@@ -80,7 +80,7 @@ export default function Login() {
             <div className="absolute inset-0 flex items-center">
               <Separator />
             </div>
-            <div className="relative flex justify-center text-xs uppercase">
+            <div className="relative flex justify-center text-xs uppercase" style={{ display: 'none' }}>
               <span className="bg-background px-2 text-muted-foreground">
                 Or continue with
               </span>
@@ -88,6 +88,7 @@ export default function Login() {
           </div>
 
           <Button
+          style={{ display: 'none' }}
             variant="outline"
             type="button"
             className="w-full"
@@ -100,9 +101,9 @@ export default function Login() {
         </CardContent>
         <CardFooter className="flex flex-wrap items-center justify-between gap-2">
           <div className="text-sm text-muted-foreground">
-            Don't have an account?{' '}
+            Não tens conta?{' '}
             <Link to="/signup" className="text-primary hover:underline">
-              Sign up
+              Criar uma conta
             </Link>
           </div>
         </CardFooter>

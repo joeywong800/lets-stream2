@@ -10,14 +10,14 @@ const AuthButtons = () => {
       <Button variant="nav" asChild size="sm">
         <Link to="/login" className="flex items-center gap-1.5">
           <LogIn className="h-3.5 w-3.5" />
-          <span>Log In</span>
+          <span>Entrar</span>
         </Link>
       </Button>
       
       <Button variant="gradient" asChild size="sm">
         <Link to="/signup" className="flex items-center gap-1.5">
           <UserPlus className="h-3.5 w-3.5" />
-          <span>Sign Up</span>
+          <span>Criar Conta</span>
         </Link>
       </Button>
     </div>

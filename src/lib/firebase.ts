@@ -5,13 +5,13 @@ import { getFirestore, initializeFirestore, memoryLocalCache } from 'firebase/fi
 
 // Load Firebase configuration from environment variables with fallbacks
 const firebaseConfig = {
-  apiKey: import.meta.env.VITE_FIREBASE_API_KEY || "AIzaSyC0TaRtjDOcQgtTB0UI2XBv4zYYbeTg3FU",
-  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN || "lets-stream-c09e3.firebaseapp.com",
-  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID || "lets-stream-c09e3",
-  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET || "lets-stream-c09e3.firebasestorage.app",
-  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID || "1080273996839",
-  appId: import.meta.env.VITE_FIREBASE_APP_ID || "1:1080273996839:web:2b42f26b59f4e22ff91202",
-  measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID || "G-691PPKTFXS"
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY || "AIzaSyDAMQjalxUj6PQDvJ1t261GW0nfOAcLFxE",
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN || "badflix-128d1.firebaseapp.com",
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID || "badflix-128d1",
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET || "badflix-128d1.firebasestorage.app",
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID || "904552574274",
+  appId: import.meta.env.VITE_FIREBASE_APP_ID || "1:904552574274:web:0e6850f6910341f4126cdb",
+  measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID || ""
 };
 
 // Initialize Firebase with specified config or get existing instance

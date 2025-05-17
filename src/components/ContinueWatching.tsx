@@ -1,4 +1,3 @@
-
 import { useState, useEffect, useRef, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
@@ -15,6 +14,7 @@ import {
   TooltipTrigger,
 } from '@/components/ui/tooltip';
 import { formatDistanceToNow } from 'date-fns';
+import { ptBR } from 'date-fns/locale'; // 👈 Adicionado para tradução
 
 interface ContinueWatchingProps {
   maxItems?: number;
@@ -30,11 +30,8 @@ const ContinueWatching = ({ maxItems = 20 }: ContinueWatchingProps) => {
   const rowRef = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
   
-  // Filter and deduplicate watch history
   const processedHistory = useMemo(() => {
     if (watchHistory.length === 0) return [];
-    
-    // First, filter out invalid dates
     const validItems = watchHistory.filter(item => {
       if (!item.created_at) return false;
       try {
@@ -44,35 +41,26 @@ const ContinueWatching = ({ maxItems = 20 }: ContinueWatchingProps) => {
         return false;
       }
     });
-    
-    // Create a map to store the most recent item for each unique media
     const uniqueMediaMap = new Map<string, WatchHistoryItem>();
-    
     validItems.forEach(item => {
-      // Create a unique key for each media, including season and episode for TV shows
       const key = `${item.media_type}-${item.media_id}${item.media_type === 'tv' ? `-s${item.season}-e${item.episode}` : ''}`;
-      
-      // If we haven't seen this item yet, or if this item is more recent than what we have, update the map
       if (!uniqueMediaMap.has(key) || new Date(item.created_at) > new Date(uniqueMediaMap.get(key)!.created_at)) {
         uniqueMediaMap.set(key, item);
       }
     });
-    
-    // Convert the map values back to an array and sort by most recent
     return Array.from(uniqueMediaMap.values())
       .sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
   }, [watchHistory]);
-  
+
   useEffect(() => {
     setContinuableItems(processedHistory.slice(0, maxItems));
   }, [processedHistory, maxItems]);
 
-  // Handle scroll position to show/hide arrows
   const handleScroll = () => {
     if (!rowRef.current) return;
     const { scrollLeft, scrollWidth, clientWidth } = rowRef.current;
     setShowLeftArrow(scrollLeft > 0);
-    setShowRightArrow(scrollLeft < scrollWidth - clientWidth - 10); // 10px buffer
+    setShowRightArrow(scrollLeft < scrollWidth - clientWidth - 10);
   };
 
   const scrollLeft = () => {
@@ -87,37 +75,33 @@ const ContinueWatching = ({ maxItems = 20 }: ContinueWatchingProps) => {
     rowRef.current.scrollBy({ left: scrollAmount, behavior: 'smooth' });
   };
   
+  // ✅ Atualizada para português
   const formatLastWatched = (dateString: string) => {
-    if (!dateString) return 'Recently';
-    
+    if (!dateString) return 'Recentemente';
     try {
       const date = new Date(dateString);
       if (isNaN(date.getTime()) || date > new Date()) {
-        return 'Recently';
+        return 'Recentemente';
       }
-      return formatDistanceToNow(date, { addSuffix: true });
+      return formatDistanceToNow(date, {
+        addSuffix: true,
+        locale: ptBR,
+      });
     } catch {
-      return 'Recently';
+      return 'Recentemente';
     }
   };
-
-  const formatProgress = (position: number, duration: number) => {
-    if (!duration) return '0%';
-    return `${Math.round((position / duration) * 100)}%`;
-  }
 
   const formatTimeRemaining = (position: number, duration: number) => {
     if (!duration) return '';
     const remaining = Math.max(0, duration - position);
     const minutes = Math.floor(remaining / 60);
     const seconds = Math.floor(remaining % 60);
-    return `${minutes}:${seconds.toString().padStart(2, '0')} remaining`;
-  }
+    return `Duração ${minutes}:${seconds.toString().padStart(2, '0')}`;
+  };
 
-  if (!user || continuableItems.length === 0) {
-    return null;
-  }
-  
+  if (!user || continuableItems.length === 0) return null;
+
   const handleContinueWatching = (item: WatchHistoryItem) => {
     if (item.media_type === 'movie') {
       navigate(`/watch/${item.media_type}/${item.media_id}`);
@@ -125,17 +109,17 @@ const ContinueWatching = ({ maxItems = 20 }: ContinueWatchingProps) => {
       navigate(`/watch/${item.media_type}/${item.media_id}/${item.season}/${item.episode}`);
     }
   };
-  
+
   const handleNavigateToDetails = (event: React.MouseEvent, item: WatchHistoryItem) => {
     event.stopPropagation();
     navigate(`/${item.media_type === 'movie' ? 'movie' : 'tv'}/${item.media_id}`);
   };
-  
+
   return (
     <div className="px-4 md:px-8 mt-8 mb-6">
       <h2 className="text-xl md:text-2xl font-bold text-white mb-4 flex items-center">
         <Clock className="h-5 w-5 mr-2 text-accent" />
-        Continue Watching
+        Continuar Assistir
       </h2>
       
       <div 
@@ -143,7 +127,6 @@ const ContinueWatching = ({ maxItems = 20 }: ContinueWatchingProps) => {
         onMouseEnter={() => setIsHovering(true)}
         onMouseLeave={() => setIsHovering(false)}
       >
-        {/* Left scroll button */}
         {showLeftArrow && (
           <button
             className={`absolute left-0 top-1/2 -translate-y-1/2 z-10 w-10 h-10 flex items-center justify-center rounded-full bg-black/70 text-white transition-all ${
@@ -172,18 +155,14 @@ const ContinueWatching = ({ maxItems = 20 }: ContinueWatchingProps) => {
               animate={{ opacity: 1, y: 0 }}
               whileHover={{ scale: 1.02 }}
               onClick={() => handleContinueWatching(item)}
-              style={{
-                boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.3)'
-              }}
+              style={{ boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.3)' }}
             >
               <img
                 src={`https://image.tmdb.org/t/p/w500${item.backdrop_path}`}
                 alt={item.title}
                 className="w-full h-full object-cover transition-transform group-hover:scale-110 group-hover:brightness-110"
               />
-              
               <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/60 to-transparent" />
-              
               <div className="absolute bottom-4 left-4 right-4 z-10">
                 <div className="flex justify-between items-start mb-1">
                   <h3 className="text-white font-medium line-clamp-1 text-base md:text-lg">{item.title}</h3>
@@ -200,23 +179,20 @@ const ContinueWatching = ({ maxItems = 20 }: ContinueWatchingProps) => {
                         </Button>
                       </TooltipTrigger>
                       <TooltipContent side="top">
-                        <p>View details</p>
+                        <p>Ver detalhes</p>
                       </TooltipContent>
                     </Tooltip>
                   </TooltipProvider>
                 </div>
-                
                 <div className="flex items-center justify-between text-xs text-white/70 mb-2">
                   <span className="flex items-center">
                     <Clock className="h-3 w-3 mr-1" />
                     {formatLastWatched(item.created_at)}
                   </span>
-                  
                   {item.media_type === 'tv' && (
-                    <span>S{item.season} E{item.episode}</span>
+                    <span>T{item.season} EP{item.episode}</span>
                   )}
                 </div>
-                
                 <div className="mb-3 relative">
                   <Progress 
                     value={(item.watch_position / item.duration) * 100} 
@@ -226,20 +202,18 @@ const ContinueWatching = ({ maxItems = 20 }: ContinueWatchingProps) => {
                     {formatTimeRemaining(item.watch_position, item.duration)}
                   </div>
                 </div>
-                
                 <Button 
                   className="w-full bg-accent hover:bg-accent/80 text-white flex items-center justify-center gap-1"
                   size="sm"
                 >
                   <Play className="h-3 w-3" />
-                  Continue
+                  Continuar
                 </Button>
               </div>
             </motion.div>
           ))}
         </motion.div>
 
-        {/* Right scroll button */}
         {showRightArrow && (
           <button
             className={`absolute right-0 top-1/2 -translate-y-1/2 z-10 w-10 h-10 flex items-center justify-center rounded-full bg-black/70 text-white transition-all ${

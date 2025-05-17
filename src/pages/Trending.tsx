@@ -75,13 +75,13 @@ const Trending = () => {
         <div className="container px-4 py-8">
           <div className="flex items-center gap-3 mb-8 pt-10">
             <TrendingUp className="h-8 w-8 text-accent" />
-            <h1 className="text-3xl font-bold text-white">Trending</h1>
+            <h1 className="text-3xl font-bold text-white">Tendências</h1>
           </div>
           
           <Tabs defaultValue="week" onValueChange={(value) => handleTimeWindowChange(value as 'day' | 'week')}>
             <TabsList className="mb-8">
-              <TabsTrigger value="day">Today</TabsTrigger>
-              <TabsTrigger value="week">This Week</TabsTrigger>
+              <TabsTrigger value="day">Hoje</TabsTrigger>
+              <TabsTrigger value="week">Esta semana</TabsTrigger>
             </TabsList>
             
             <TabsContent value="day">
@@ -91,7 +91,7 @@ const Trending = () => {
                 <div className="py-12 text-center text-white">Error loading trending content. Please try again.</div>
               ) : (
                 <>
-                  <MediaGrid media={extendedMedia} title="Trending Today" />
+                  <MediaGrid media={extendedMedia} title="Tendência de hoje" />
                   
                   {hasMore && (
                     <div className="flex justify-center my-8">
@@ -103,7 +103,7 @@ const Trending = () => {
                         {trendingQuery.isFetching ? (
                           <>Loading...</>
                         ) : (
-                          <>Show More <ChevronDown className="ml-2 h-4 w-4 animate-bounce" /></>
+                          <>Mostrar mais <ChevronDown className="ml-2 h-4 w-4 animate-bounce" /></>
                         )}
                       </Button>
                     </div>
@@ -119,7 +119,7 @@ const Trending = () => {
                 <div className="py-12 text-center text-white">Error loading trending content. Please try again.</div>
               ) : (
                 <>
-                  <MediaGrid media={extendedMedia} title="Trending This Week" />
+                  <MediaGrid media={extendedMedia} title="Tendência desta semana" />
                   
                   {hasMore && (
                     <div className="flex justify-center my-8">
@@ -131,7 +131,7 @@ const Trending = () => {
                         {trendingQuery.isFetching ? (
                           <>Loading...</>
                         ) : (
-                          <>Show More <ChevronDown className="ml-2 h-4 w-4 animate-bounce" /></>
+                          <>Mostrar mais <ChevronDown className="ml-2 h-4 w-4 animate-bounce" /></>
                         )}
                       </Button>
                     </div>

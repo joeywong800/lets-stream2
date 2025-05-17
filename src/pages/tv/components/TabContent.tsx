@@ -101,10 +101,10 @@ const TabContent = ({ type, viewMode, sortBy, genreFilter, platformFilters }: Ta
 
   // Determine the title based on the type
   const title = type === 'popular' 
-    ? "Popular TV Shows" 
+    ? "Séries & Animes Populares" 
     : type === 'top_rated' 
-      ? "Top Rated TV Shows" 
-      : "Trending TV Shows";
+      ? "Top Séries & animes mais avaliados" 
+      : "Tendência de Séries & Animes";
 
   return (
     <>

@@ -108,7 +108,7 @@ export const TVShowHeader = ({
                 
               <div className="flex items-center text-white/80">
                 <List className="h-4 w-4 mr-2" />
-                {tvShow.number_of_seasons} {tvShow.number_of_seasons === 1 ? 'Season' : 'Seasons'}
+                {tvShow.number_of_seasons} {tvShow.number_of_seasons === 1 ? 'Temporada' : 'Temporadas'}
               </div>
                 
               {tvShow.vote_average > 0 && (
@@ -138,7 +138,7 @@ export const TVShowHeader = ({
                 className="bg-accent hover:bg-accent/80 text-white flex items-center"
               >
                 <Play className="h-4 w-4 mr-2" />
-                Play Latest Episode
+                Assistir primeiro episódio
               </Button>
 
               {lastWatchedEpisode && (
@@ -150,7 +150,7 @@ export const TVShowHeader = ({
                   className="border-accent text-accent hover:bg-accent/10 flex items-center"
                 >
                   <History className="h-4 w-4 mr-2" />
-                  Continue S{lastWatchedEpisode.season} E{lastWatchedEpisode.episode} ({lastWatchedEpisode.progress}%)
+                  Continuar T{lastWatchedEpisode.season} EP{lastWatchedEpisode.episode} ({lastWatchedEpisode.progress}%)
                 </Button>
               )}
 
@@ -163,7 +163,7 @@ export const TVShowHeader = ({
                 )}
               >
                 <Heart className={cn("h-4 w-4 mr-2", isFavorite && "fill-current")} />
-                {isFavorite ? 'In Favorites' : 'Add to Favorites'}
+                {isFavorite ? 'Favorito' : 'Favorito'}
               </Button>
 
               <Button 
@@ -175,7 +175,7 @@ export const TVShowHeader = ({
                 )}
               >
                 <Bookmark className={cn("h-4 w-4 mr-2", isInWatchlist && "fill-current")} />
-                {isInWatchlist ? 'In Watchlist' : 'Add to Watchlist'}
+                {isInWatchlist ? 'Minha Lista' : 'Minha Lista'}
               </Button>
             </div>
           </div>

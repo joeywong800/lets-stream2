@@ -2,6 +2,7 @@ import { Media } from '@/utils/types';
 import MediaCard from './MediaCard';
 import { motion, Variants } from 'framer-motion';
 import { formatDistanceToNow } from 'date-fns';
+import { ptBR } from 'date-fns/locale'; // ✅ Adicionado para português
 import { Clock, Trash2, SquareCheck, Square } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
@@ -40,7 +41,7 @@ const MediaGrid = ({
   if (!media || media.length === 0) {
     return (
       <div className="py-8 text-center text-white">
-        <p>No results found.</p>
+        <p>Sem resultados encontrados.</p>
       </div>
     );
   }
@@ -84,11 +85,11 @@ const MediaGrid = ({
 
   const renderTimestamp = (media: ExtendedMedia) => {
     if (!media.created_at) return null;
-    
+
     return (
       <div className="flex items-center text-xs text-white/70 mb-2">
         <Clock className="h-3 w-3 mr-1" />
-        {formatDistanceToNow(new Date(media.created_at), { addSuffix: true })}
+        {formatDistanceToNow(new Date(media.created_at), { addSuffix: true, locale: ptBR })}
       </div>
     );
   };
@@ -104,7 +105,7 @@ const MediaGrid = ({
           onClick={toggleSelectMode}
           className="border-white/20 bg-black/50 text-white hover:bg-black/70"
         >
-          {selectMode ? 'Cancel Selection' : 'Select Items'}
+          {selectMode ? 'Cancelar Seleção' : 'Selecionar'}
         </Button>
         
         {selectMode && (
@@ -120,7 +121,7 @@ const MediaGrid = ({
               ) : (
                 <SquareCheck className="h-4 w-4 mr-2" />
               )}
-              {selectedItems.length === media.length ? 'Deselect All' : 'Select All'}
+              {selectedItems.length === media.length ? 'Desmarcar Todos' : 'Selecionar Todos'}
             </Button>
             
             {selectedItems.length > 0 && onDeleteSelected && (
@@ -131,7 +132,7 @@ const MediaGrid = ({
                 className="ml-auto"
               >
                 <Trash2 className="h-4 w-4 mr-2" />
-                Delete Selected ({selectedItems.length})
+                Apagar Selecionados ({selectedItems.length})
               </Button>
             )}
           </>

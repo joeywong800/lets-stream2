@@ -36,7 +36,7 @@ export default function AccentColorPicker() {
 
   return (
     <div className="space-y-4">
-      <h3 className="text-lg font-medium text-white">Accent Color</h3>
+      <h3 className="text-lg font-medium text-white">Design</h3>
       <div className="flex flex-wrap gap-3">
         {accentColors.map((color) => (
           <Button
@@ -58,7 +58,7 @@ export default function AccentColorPicker() {
         ))}
       </div>
       <div className="mt-2 text-sm text-white/70">
-        Choose an accent color to personalize your experience
+        Escolha uma cor para personalizar a sua experiência
       </div>
     </div>
   );

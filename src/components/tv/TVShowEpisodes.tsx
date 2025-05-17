@@ -33,7 +33,7 @@ export const TVShowEpisodes = ({
   
   return (
     <>
-      <h2 className="text-2xl font-bold text-white mb-6">Seasons & Episodes</h2>
+      <h2 className="text-2xl font-bold text-white mb-6">Escolhe temporada e episódio</h2>
         
       <Tabs 
         defaultValue={selectedSeason.toString()} 
@@ -49,7 +49,7 @@ export const TVShowEpisodes = ({
                 value={season.season_number.toString()}
                 className={selectedSeason === season.season_number ? 'text-white' : 'text-white/70'}
               >
-                Season {season.season_number}
+                Temporada {season.season_number}
               </TabsTrigger>
             ))}
         </TabsList>
@@ -99,7 +99,7 @@ export const TVShowEpisodes = ({
                     className="bg-accent hover:bg-accent/80 text-white flex items-center"
                   >
                     <Play className="h-3 w-3 mr-1" />
-                    Play
+                    Assistir Agora
                   </Button>
                 </div>
               </div>

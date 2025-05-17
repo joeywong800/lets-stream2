@@ -98,10 +98,10 @@ const ChatMessage: React.FC<ChatMessageProps> = ({ message }) => {
               {hasReacted ? (
                 <span className="flex items-center">
                   <ThumbsUp className="h-3 w-3 mr-1" /> 
-                  Rated
+                  Avaliado
                 </span>
               ) : (
-                'Rate this'
+                'Avalia isto'
               )}
             </Button>
           )}

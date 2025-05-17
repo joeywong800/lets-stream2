@@ -42,11 +42,11 @@ const MobileMenu = ({ isOpen, onClose }: MobileMenuProps) => {
           <div className="flex gap-3 justify-center">
             <Button onClick={onClose} variant="gradient" asChild>
               <a href="/login" className="flex items-center gap-2">
-                <span>Log In</span>
+                <span>Entrar</span>
               </a>
             </Button>
             <Button onClick={onClose} variant="outline" asChild>
-              <a href="/signup">Sign Up</a>
+              <a href="/signup">Criar Conta</a>
             </Button>
           </div>
         )}

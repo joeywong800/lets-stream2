@@ -34,7 +34,7 @@ const MediaActions = ({
         onClick={onBack}
       >
         <ArrowLeft className="h-4 w-4 mr-2" />
-        Back
+        Voltar
       </Button>
 
       <div className="flex-1" />

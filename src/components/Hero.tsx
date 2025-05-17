@@ -212,7 +212,7 @@ const Hero = ({ media, className = '' }: HeroProps) => {
           {/* Metadata badges */}
           <div className="flex flex-wrap items-center gap-3 mb-4">
             <span className="px-3 py-1 rounded-full bg-accent/90 backdrop-blur-sm text-xs font-medium text-white uppercase tracking-wider">
-              {featuredMedia.media_type === 'movie' ? 'Movie' : 'TV Series'}
+              {featuredMedia.media_type === 'movie' ? 'Filme' : 'Série'}
             </span>
             
             {releaseYear && (
@@ -247,15 +247,15 @@ const Hero = ({ media, className = '' }: HeroProps) => {
           {/* Action buttons */}
           <div className="flex flex-wrap gap-4">
             <Button
-              onClick={handlePlay}
+              onClick={handleMoreInfo}
               className="hero-button bg-accent hover:bg-accent/90 text-white flex items-center transition-all hover:scale-105 shadow-lg shadow-accent/20"
               size="lg"
             >
               <Play className="h-4 w-4 mr-2" />
-              Play Now
+              Assistir
             </Button>
             
-            <Button
+            {/*<Button
               onClick={handleMoreInfo}
               variant="outline"
               size="lg"
@@ -263,7 +263,7 @@ const Hero = ({ media, className = '' }: HeroProps) => {
             >
               <Info className="h-4 w-4 mr-2" />
               More Info
-            </Button>
+            </Button>*/}
           </div>
         </motion.div>
       </AnimatePresence>

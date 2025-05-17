@@ -16,6 +16,7 @@ const getGenreContent = async (genreId: number, page: number = 1): Promise<Media
       params: {
         with_genres: genreId,
         sort_by: 'popularity.desc',
+        language: 'pt-BR',
         page
       }
     });
@@ -40,6 +41,7 @@ export const getBollywoodMovies = async (page: number = 1): Promise<Media[]> => 
         with_original_language: 'hi',
         region: 'IN',
         sort_by: 'popularity.desc',
+        language: 'pt-BR',
         page
       }
     });

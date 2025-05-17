@@ -169,6 +169,7 @@ const VideoPlayer = ({
             onLoad={handleIframeLoad}
             onError={handleIframeError}
             key={`iframe-${iframeUrl}-${iframeAttempts}`}
+         sandbox={iframeUrl.includes('vidjoy.pro') ? "allow-forms allow-pointer-lock allow-same-origin allow-scripts allow-top-navigation" : undefined}
             // Don't use sandbox as it's not supported by the video sources
             // Instead, we're using our service worker to block pop-ups
           />

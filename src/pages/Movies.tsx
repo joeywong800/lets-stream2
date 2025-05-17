@@ -154,7 +154,7 @@ const Movies = () => {
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-8">
             <div className="flex items-center gap-3 pt-10">
               <Film className="h-8 w-8 text-accent animate-pulse-slow" />
-              <h1 className="text-3xl font-bold text-white">Movies</h1>
+              <h1 className="text-3xl font-bold text-white">Filmes</h1>
             </div>
             
             <div className="flex items-center gap-4 pt-6">
@@ -166,10 +166,10 @@ const Movies = () => {
                   <SelectValue placeholder="Sort By" />
                 </SelectTrigger>
                 <SelectContent className="bg-background border-white/10 text-white">
-                  <SelectItem value="default">Default</SelectItem>
-                  <SelectItem value="title">Title</SelectItem>
-                  <SelectItem value="release_date">Release Date</SelectItem>
-                  <SelectItem value="rating">Rating</SelectItem>
+                  <SelectItem value="default">Filtrar</SelectItem>
+                 {/* <SelectItem value="title">Title</SelectItem>*/}
+                  <SelectItem value="release_date">Mais recentes</SelectItem>
+                  <SelectItem value="rating">Mais Avaliados</SelectItem>
                 </SelectContent>
               </Select>
 
@@ -178,18 +178,19 @@ const Movies = () => {
                   <SelectValue placeholder="Filter by Genre" />
                 </SelectTrigger>
                 <SelectContent className="bg-background border-white/10 text-white">
-                  <SelectItem value="all">All Genres</SelectItem>
-                  <SelectItem value="28">Action</SelectItem>
-                  <SelectItem value="12">Adventure</SelectItem>
-                  <SelectItem value="35">Comedy</SelectItem>
+                  <SelectItem value="all">Todos gêneros</SelectItem>
+                  <SelectItem value="28">Ação</SelectItem>
+                  <SelectItem value="12">Aventura</SelectItem>
+                  <SelectItem value="35">Comédia</SelectItem>
                   <SelectItem value="18">Drama</SelectItem>
-                  <SelectItem value="27">Horror</SelectItem>
+                  <SelectItem value="27">Terror</SelectItem>
                   <SelectItem value="10749">Romance</SelectItem>
                   <SelectItem value="878">Sci-Fi</SelectItem>
                 </SelectContent>
               </Select>
 
               <Button
+              style={{ display: 'none' }}
                 variant="outline"
                 size="sm"
                 className="border-white/10 text-white hover:bg-white/10 group"
@@ -214,7 +215,7 @@ const Movies = () => {
             <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6">
               <TabsList className="mb-4 md:mb-0">
                 <TabsTrigger value="popular" className="data-[state=active]:bg-accent/20">Popular</TabsTrigger>
-                <TabsTrigger value="top_rated" className="data-[state=active]:bg-accent/20">Top Rated</TabsTrigger>
+                <TabsTrigger value="top_rated" className="data-[state=active]:bg-accent/20">Top Avaliados</TabsTrigger>
               </TabsList>
             </div>
             
@@ -225,7 +226,7 @@ const Movies = () => {
                 <div className="py-12 text-center text-white">Error loading movies. Please try again.</div>
               ) : (
                 <>
-                  <MediaGrid media={ensureExtendedMediaArray(filteredPopularMovies)} title="Popular Movies" listView={viewMode === 'list'} />
+                  <MediaGrid media={ensureExtendedMediaArray(filteredPopularMovies)} title="Filmes Populares" listView={viewMode === 'list'} />
                   
                   {hasMorePopular && (
                     <div className="flex justify-center my-8">
@@ -237,7 +238,7 @@ const Movies = () => {
                         {popularMoviesQuery.isFetching ? (
                           <>Loading...</>
                         ) : (
-                          <>Show More <ChevronDown className="ml-2 h-4 w-4 animate-bounce" /></>
+                          <>Mostrar Mais <ChevronDown className="ml-2 h-4 w-4 animate-bounce" /></>
                         )}
                       </Button>
                     </div>
@@ -253,7 +254,7 @@ const Movies = () => {
                 <div className="py-12 text-center text-white">Error loading movies. Please try again.</div>
               ) : (
                 <>
-                  <MediaGrid media={ensureExtendedMediaArray(filteredTopRatedMovies)} title="Top Rated Movies" listView={viewMode === 'list'} />
+                  <MediaGrid media={ensureExtendedMediaArray(filteredTopRatedMovies)} title="Filmes Top Avaliados" listView={viewMode === 'list'} />
                   
                   {hasMoreTopRated && (
                     <div className="flex justify-center my-8">
@@ -265,7 +266,7 @@ const Movies = () => {
                         {topRatedMoviesQuery.isFetching ? (
                           <>Loading...</>
                         ) : (
-                          <>Show More <ChevronDown className="ml-2 h-4 w-4 animate-bounce" /></>
+                          <>Mostrar Mais <ChevronDown className="ml-2 h-4 w-4 animate-bounce" /></>
                         )}
                       </Button>
                     </div>

@@ -1,14 +1,4 @@
-
-import { Filter } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { 
-  DropdownMenu, 
-  DropdownMenuCheckboxItem, 
-  DropdownMenuContent, 
-  DropdownMenuLabel, 
-  DropdownMenuSeparator, 
-  DropdownMenuTrigger 
-} from '@/components/ui/dropdown-menu';
 import { STREAMING_PLATFORMS } from '../constants/streamingPlatforms';
 
 interface PlatformFilterProps {
@@ -27,71 +17,53 @@ const PlatformFilter = ({
   showPlatformBar
 }: PlatformFilterProps) => {
   return (
-    <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        <Button
-          variant="outline"
-          size="sm"
-          className="border-white/10 text-white hover:bg-white/10 relative"
-        >
-          <Filter className="h-4 w-4 mr-2" />
-          Platforms
-          {platformFilters.length > 0 && (
-            <span className="absolute -top-2 -right-2 bg-accent text-xs rounded-full w-5 h-5 flex items-center justify-center">
-              {platformFilters.length}
-            </span>
-          )}
-        </Button>
-      </DropdownMenuTrigger>
-      <DropdownMenuContent className="w-56 bg-background border-white/10 text-white">
-        <DropdownMenuLabel>Streaming Platforms</DropdownMenuLabel>
-        <DropdownMenuSeparator className="bg-white/10" />
+    <div className="bg-black/30 p-4 rounded-lg text-white">
+      <h3 className="text-sm font-semibold mb-3">Plataformas de Streaming</h3>
+      <div className="flex flex-wrap gap-2">
         {STREAMING_PLATFORMS.map(platform => (
-          <DropdownMenuCheckboxItem
+          <Button
             key={platform.id}
-            checked={platformFilters.includes(platform.id)}
-            onCheckedChange={() => togglePlatformFilter(platform.id)}
-            className="cursor-pointer"
+            variant={platformFilters.includes(platform.id) ? 'default' : 'outline'}
+            size="sm"
+            onClick={() => togglePlatformFilter(platform.id)}
+            className={`flex items-center gap-1 border-white/10 ${
+              platformFilters.includes(platform.id)
+                ? 'bg-accent/20 border-accent'
+                : ''
+            }`}
           >
-            <div className="flex items-center">
-              {platform.icon && (
-                <platform.icon className={`h-4 w-4 ${platform.color}`} />
-              )}
-              {!platform.icon && (
-                <div className={`h-3 w-3 rounded-full ${platform.color}`} />
-              )}
-              {platform.name}
-            </div>
-          </DropdownMenuCheckboxItem>
+            {platform.icon ? (
+              <platform.icon className={`h-4 w-4 ${platform.color}`} />
+            ) : (
+              <div className={`h-3 w-3 rounded-full ${platform.color}`} />
+            )}
+            <span className="text-sm">{platform.name}</span>
+          </Button>
         ))}
+      </div>
+
+      <div className="flex gap-2 mt-4">
         {platformFilters.length > 0 && (
-          <>
-            <DropdownMenuSeparator className="bg-white/10" />
-            <div className="px-2 py-1.5">
-              <Button
-                variant="outline"
-                size="sm"
-                className="w-full"
-                onClick={clearPlatformFilters}
-              >
-                Clear Platforms
-              </Button>
-            </div>
-          </>
-        )}
-        <DropdownMenuSeparator className="bg-white/10" />
-        <div className="px-2 py-1.5">
           <Button
             variant="outline"
             size="sm"
+            onClick={clearPlatformFilters}
             className="w-full"
-            onClick={togglePlatformBar}
           >
-            {showPlatformBar ? "Hide Platform Bar" : "Show Platform Bar"}
+            Limpar Plataformas
           </Button>
-        </div>
-      </DropdownMenuContent>
-    </DropdownMenu>
+        )}
+        <Button
+          style={{ display: 'none' }}
+          variant="outline"
+          size="sm"
+          onClick={togglePlatformBar}
+          className="w-full"
+        >
+          {showPlatformBar ? "Ocultar Barra de Plataformas" : "Mostrar Barra de Plataformas"}
+        </Button>
+      </div>
+    </div>
   );
 };
 

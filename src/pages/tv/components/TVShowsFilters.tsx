@@ -58,10 +58,10 @@ const TVShowsFilters = ({
               <SelectValue placeholder="Sort By" />
             </SelectTrigger>
             <SelectContent className="bg-background border-white/10 text-white">
-              <SelectItem value="default">Default</SelectItem>
-              <SelectItem value="name">Name</SelectItem>
-              <SelectItem value="first_air_date">First Air Date</SelectItem>
-              <SelectItem value="rating">Rating</SelectItem>
+              <SelectItem value="default">Filtrar</SelectItem>
+             {/*} <SelectItem value="name">Name</SelectItem>
+              <SelectItem value="first_air_date">First Air Date</SelectItem>*/}
+              <SelectItem value="rating">Mais Avaliados</SelectItem>
             </SelectContent>
           </Select>
 
@@ -70,14 +70,14 @@ const TVShowsFilters = ({
               <SelectValue placeholder="Filter by Genre" />
             </SelectTrigger>
             <SelectContent className="bg-background border-white/10 text-white">
-              <SelectItem value="all">All Genres</SelectItem>
-              <SelectItem value="10759">Action & Adventure</SelectItem>
-              <SelectItem value="35">Comedy</SelectItem>
+              <SelectItem value="all">Todos gêneros</SelectItem>
+              <SelectItem value="10759">Ação & Aventura</SelectItem>
+              <SelectItem value="35">Comédia</SelectItem>
               <SelectItem value="18">Drama</SelectItem>
-              <SelectItem value="10765">Sci-Fi & Fantasy</SelectItem>
+              <SelectItem value="10765">Sci-Fi & Fantasia</SelectItem>
               <SelectItem value="80">Crime</SelectItem>
-              <SelectItem value="9648">Mystery</SelectItem>
-              <SelectItem value="10762">Kids</SelectItem>
+              <SelectItem value="9648">Mistério</SelectItem>
+              <SelectItem value="10762">Crianças</SelectItem>
             </SelectContent>
           </Select>
 
@@ -90,6 +90,7 @@ const TVShowsFilters = ({
           />
 
           <Button
+            style={{ display: 'none' }}
             variant="outline"
             size="sm"
             className="border-white/10 text-white hover:bg-white/10 group"

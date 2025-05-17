@@ -23,8 +23,8 @@ const TVShowsTabs = ({
     <Tabs defaultValue={activeTab} onValueChange={onTabChange}>
       <TabsList className="mb-4 md:mb-6">
         <TabsTrigger value="popular" className="data-[state=active]:bg-accent/20">Popular</TabsTrigger>
-        <TabsTrigger value="top_rated" className="data-[state=active]:bg-accent/20">Top Rated</TabsTrigger>
-        <TabsTrigger value="trending" className="data-[state=active]:bg-accent/20">Trending</TabsTrigger>
+        <TabsTrigger value="top_rated" className="data-[state=active]:bg-accent/20">Top Avaliados</TabsTrigger>
+        <TabsTrigger value="trending" className="data-[state=active]:bg-accent/20">Tendência</TabsTrigger>
       </TabsList>
       
       <TabsContent value="popular" className="focus-visible:outline-none animate-fade-in">

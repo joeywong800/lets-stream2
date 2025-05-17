@@ -133,7 +133,7 @@ const SearchBar = ({
         <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-white/60 w-4 h-4 pointer-events-none" />
         <Input
           type="search"
-          placeholder={isMobile ? "Search..." : "Search... (Press /)"}
+          placeholder={isMobile ? "Procurar.." : "Procurar.."}
           className="search-input pl-10 pr-12 h-10" // Added explicit height
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
@@ -164,14 +164,14 @@ const SearchBar = ({
                   }
                 </span>
                 <span className="flex-1 text-left truncate">{item.title || item.name}</span>
-                <span className="ml-2 opacity-50 text-xs bg-white/10 px-1.5 py-0.5 rounded flex-shrink-0">Enter</span>
+                <span className="ml-2 opacity-50 text-xs bg-white/10 px-1.5 py-0.5 rounded flex-shrink-0"></span>
               </button>
             ))}
             <button
               onClick={handleSearch}
               className="suggestion-item font-medium text-accent justify-center"
             >
-              View all results for "{searchQuery}"
+              Mostrar tudo para "{searchQuery}"
             </button>
           </div>
         )}

@@ -6,7 +6,7 @@ export const tmdb = axios.create({
   baseURL: TMDB.BASE_URL,
   params: {
     api_key: TMDB.API_KEY,
-    language: 'en-US'
+    language: 'pt-BR'
   }
 });
 

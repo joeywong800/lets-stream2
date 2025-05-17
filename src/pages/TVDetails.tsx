@@ -112,9 +112,10 @@ const TVDetailsPage = () => {
             }`}
             onClick={() => setActiveTab('episodes')}
           >
-            Episodes
+            Episódios
           </button>
           <button
+          style={{ display: 'none' }}
             className={`py-2 px-4 font-medium whitespace-nowrap ${
               activeTab === 'about' 
                 ? 'text-white border-b-2 border-accent' 
@@ -132,9 +133,10 @@ const TVDetailsPage = () => {
             }`}
             onClick={() => setActiveTab('cast')}
           >
-            Cast
+            Elenco
           </button>
           <button
+          style={{ display: 'none' }}
             className={`py-2 px-4 font-medium whitespace-nowrap ${
               activeTab === 'reviews' 
                 ? 'text-white border-b-2 border-accent' 
@@ -156,9 +158,9 @@ const TVDetailsPage = () => {
           />
         )}
         
-        {activeTab === 'about' && (
+       {/* {activeTab === 'about' && (
           <TVShowAbout tvShow={tvShow} />
-        )}
+        )}*/}
         
         {activeTab === 'cast' && (
           <TVShowCast cast={cast} />
@@ -174,7 +176,7 @@ const TVDetailsPage = () => {
       
       {recommendations.length > 0 && (
         <ContentRow
-          title="More Like This"
+          title="Também deves gostar"
           media={recommendations}
         />
       )}

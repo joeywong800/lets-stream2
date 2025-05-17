@@ -15,19 +15,18 @@ const NavLinks = ({ mobile = false, onClick }: { mobile?: boolean; onClick?: () 
   const { user } = useAuth();
   
   const navItems: NavItem[] = [
-    { title: 'Home', path: '/', icon: <Home className="h-4 w-4" /> },
-    { title: 'Movies', path: '/movie', icon: <Film className="h-4 w-4" /> },
-    { title: 'TV Shows', path: '/tv', icon: <Tv className="h-4 w-4" /> },
-    { title: 'Sports', path: '/sports', icon: <TrendingUp className="h-4 w-4" /> },
-    { title: 'Trending', path: '/trending', icon: <TrendingUp className="h-4 w-4" /> },
-    { title: 'Watch History', path: '/watch-history', icon: <History className="h-4 w-4" /> },
+    { title: 'Ínicio', path: '/', icon: <Home className="h-4 w-4" /> },
+    { title: 'Filmes', path: '/movie', icon: <Film className="h-4 w-4" /> },
+    { title: 'Séries & Animes', path: '/tv', icon: <Tv className="h-4 w-4" /> },
+    { title: 'Tendência ', path: '/trending', icon: <TrendingUp className="h-4 w-4" /> },
+    { title: 'Continuar Assistir', path: '/watch-history', icon: <History className="h-4 w-4" /> },
   ];
 
   const authItems: NavItem[] = user ? [
-    { title: 'Profile', path: '/profile', icon: <UserCircle className="h-4 w-4" /> },
+    { title: 'Perfil', path: '/profile', icon: <UserCircle className="h-4 w-4" /> },
   ] : [
-    { title: 'Login', path: '/login', icon: <LogIn className="h-4 w-4" /> },
-    { title: 'Sign Up', path: '/signup', icon: <UserPlus className="h-4 w-4" /> },
+    { title: 'Entrar', path: '/login', icon: <LogIn className="h-4 w-4" /> },
+    { title: 'Criar Conta', path: '/signup', icon: <UserPlus className="h-4 w-4" /> },
   ];
 
   const handleClick = () => {

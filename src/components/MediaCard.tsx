@@ -91,7 +91,7 @@ const MediaCard = ({ media, className, featured = false, minimal = false }: Medi
           <div className="absolute bottom-0 left-0 right-0 p-3 bg-gradient-to-t from-black/90 to-transparent translate-y-full group-hover/card:translate-y-0 transition-transform duration-300">
             <p className="text-white/80 text-xs line-clamp-3">{media.overview}</p>
             <div className="flex justify-center mt-2">
-              <button className="glass px-3 py-1 rounded text-xs flex items-center gap-1 text-white hover:bg-white/20 transition-colors">
+              <button style={{ display: 'none' }} className="glass px-3 py-1 rounded text-xs flex items-center gap-1 text-white hover:bg-white/20 transition-colors">
                 <Info size={12} /> Details
               </button>
             </div>

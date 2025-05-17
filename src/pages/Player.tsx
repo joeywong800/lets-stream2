@@ -106,17 +106,18 @@ const Player = () => {
           <div className="space-y-4">
             <div className="flex items-center justify-between">
               <div>
-                <h3 className="text-lg font-medium text-white">Video Sources</h3>
-                <p className="text-sm text-white/60">Select your preferred streaming source</p>
+                <h3 className="text-lg font-medium text-white">Fontes de vídeo</h3>
+                <p className="text-sm text-white/60">Seleciona a tua melhor opção</p>
               </div>
               <Button
+               style={{ display: 'none' }}
                 variant="outline"
                 size="sm"
                 className="border-white/10 bg-white/5 backdrop-blur-sm hover:bg-white/10 transition-all duration-300"
                 onClick={goToDetails}
               >
                 <ExternalLink className="h-4 w-4 mr-2" />
-                View Details
+                
               </Button>
             </div>
 

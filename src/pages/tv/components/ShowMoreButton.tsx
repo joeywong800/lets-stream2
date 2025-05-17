@@ -18,7 +18,7 @@ const ShowMoreButton = ({ onClick, isLoading }: ShowMoreButtonProps) => {
         {isLoading ? (
           <>Loading...</>
         ) : (
-          <>Show More <ChevronDown className="ml-2 h-4 w-4 animate-bounce" /></>
+          <>Mostrar Mais <ChevronDown className="ml-2 h-4 w-4 animate-bounce" /></>
         )}
       </Button>
     </div>

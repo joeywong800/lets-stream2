@@ -285,7 +285,7 @@ const Search = () => {
       <Navbar />
       
       <div className="flex-grow pt-24 px-4 md:px-8 max-w-6xl mx-auto w-full">
-        <h1 className="text-2xl md:text-3xl font-bold text-white mb-6">Search</h1>
+        <h1 className="text-2xl md:text-3xl font-bold text-white mb-6">Pesquisar</h1>
         
         <form onSubmit={handleSearch} className="mb-8">
           <div className="flex flex-col gap-4">
@@ -293,7 +293,7 @@ const Search = () => {
               <Input
                 ref={searchInputRef}
                 type="search"
-                placeholder="Search for movies, TV shows..."
+                placeholder="Procura por filmes, séries & animes"
                 className="bg-white/10 border-white/10 pl-10 pr-10 text-white placeholder:text-white/50 h-12"
                 value={query}
                 onChange={handleInputChange}
@@ -336,7 +336,7 @@ const Search = () => {
                 className="bg-accent hover:bg-accent/80 h-12 px-6 ml-auto md:ml-0"
               >
                 <SearchIcon className="h-4 w-4 mr-2" />
-                Search
+                Procurar
               </Button>
               
               <Button 
@@ -346,7 +346,7 @@ const Search = () => {
                 onClick={toggleAdvancedSearch}
               >
                 <Filter className="h-4 w-4 mr-2" />
-                Advanced Search
+                Pesquisa avançada
               </Button>
             </div>
             
@@ -395,14 +395,14 @@ const Search = () => {
         {!searchParams.get('q') && searchHistory.length > 0 && (
           <div className="mb-8">
             <div className="flex items-center justify-between mb-4">
-              <h2 className="text-lg font-semibold text-white">Recent Searches</h2>
+              <h2 className="text-lg font-semibold text-white">Pesquisas Recentes</h2>
               <Button
                 variant="ghost"
                 size="sm"
                 onClick={clearSearchHistory}
                 className="text-white/70 hover:text-white"
               >
-                Clear History
+                Limpar histórico
               </Button>
             </div>
             <div className="flex flex-wrap gap-2">
@@ -435,7 +435,7 @@ const Search = () => {
               <div>
                 <MediaGrid 
                   media={displayedResults} 
-                  title={`Results for "${searchParams.get('q')}"`} 
+                  title={`Resultados para "${searchParams.get('q')}"`} 
                 />
                 
                 {hasMoreResults && (
@@ -482,8 +482,8 @@ const Search = () => {
               </div>
             ) : (
               <div className="text-center py-12 text-white/70">
-                <p>Enter a search term to find movies and TV shows</p>
-                <p className="mt-2 text-sm">Pro tip: Press "/" anywhere to quickly search</p>
+                <p>Procura pelos teus filmes, séries & animes.</p>
+                <p className="mt-2 text-sm"></p>
               </div>
             )}
           </>
