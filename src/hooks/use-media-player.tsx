@@ -1,10 +1,9 @@
-
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getMovieDetails, getTVDetails, getSeasonDetails } from '@/utils/api';
 import { getMovieStream, getTVStream } from '@/utils/custom-api';
 import { MovieDetails, TVDetails, VideoSource, Episode } from '@/utils/types';
-import { videoSources } from '@/utils/video-sources';
+import { useVideoSources } from '@/utils/video-sources';
 import { useWatchHistory } from '@/hooks/watch-history';
 import { useAuth } from '@/hooks';
 import { useUserPreferences } from '@/hooks/user-preferences';
@@ -17,9 +16,10 @@ export const useMediaPlayer = (
   type: string | undefined
 ) => {
   const { userPreferences, updatePreferences } = useUserPreferences();
+  const { sources } = useVideoSources();
   const [title, setTitle] = useState<string>('');
   const [selectedSource, setSelectedSource] = useState<string>(
-    userPreferences?.preferred_source || videoSources[0].key
+    userPreferences?.preferred_source || (sources[0]?.key ?? 'custom-api')
   );
   const [iframeUrl, setIframeUrl] = useState<string>('');
   const [isLoading, setIsLoading] = useState(true);
@@ -78,26 +78,49 @@ export const useMediaPlayer = (
 
   useEffect(() => {
     const fetchStream = async () => {
-      if (!isCustomSource || !id) return;
+      if (!id) return;
+      
       try {
         setIsLoading(true);
         const mediaId = parseInt(id, 10);
-        let streamObj = null;
-        if (mediaType === 'movie') {
-          streamObj = await getMovieStream(mediaId);
-        } else if (mediaType === 'tv' && season && episode) {
-          streamObj = await getTVStream(mediaId, parseInt(season, 10), parseInt(episode, 10));
+        
+        // Find current source
+        const currentSource = sources.find(src => src.key === selectedSource);
+        if (!currentSource) {
+          console.warn('[MediaPlayer] Selected source not found:', selectedSource);
+          return;
         }
-        const getProxiedUrl = (url: string, headers?: Record<string, string> | null) => {
-          let proxyUrl = `https://plain-sound-6910.chintanr21.workers.dev/?url=${encodeURIComponent(url)}`;
-          if (headers && Object.keys(headers).length > 0) {
-            proxyUrl += `&headers=${encodeURIComponent(JSON.stringify(headers))}`;
-          }
-          return proxyUrl;
-        };
-        const url = streamObj?.url ? getProxiedUrl(streamObj.url, streamObj.headers) : null;
-        if (url) {
+
+        console.log('[MediaPlayer] Fetching stream for source:', currentSource.name);
+        let streamObj = null;
+
+        if (mediaType === 'movie') {
+          streamObj = await currentSource.getMovieUrl(mediaId);
+        } else if (mediaType === 'tv' && season && episode) {
+          streamObj = await currentSource.getTVUrl(mediaId, parseInt(season, 10), parseInt(episode, 10));
+        }
+
+        // If it's a string URL, treat it as a direct iframe URL
+        if (typeof streamObj === 'string') {
+          setIframeUrl(streamObj);
+          setStreamUrl(null);
+          setIsPlayerLoaded(true);
+          return;
+        }
+
+        // If it's a stream response, handle it appropriately
+        if (streamObj && streamObj.url) {
+          const getProxiedUrl = (url: string, headers?: Record<string, string> | null) => {
+            let proxyUrl = `https://plain-sound-6910.chintanr21.workers.dev/?url=${encodeURIComponent(url)}`;
+            if (headers && Object.keys(headers).length > 0) {
+              proxyUrl += `&headers=${encodeURIComponent(JSON.stringify(headers))}`;
+            }
+            return proxyUrl;
+          };
+
+          const url = getProxiedUrl(streamObj.url, streamObj.headers);
           setStreamUrl(url);
+          setIframeUrl('');
           setIsPlayerLoaded(true);
         } else {
           setIsPlayerLoaded(false);
@@ -108,7 +131,7 @@ export const useMediaPlayer = (
           });
         }
       } catch (error) {
-        console.error('Error fetching stream:', error);
+        console.error('[MediaPlayer] Error fetching stream:', error);
         setIsPlayerLoaded(false);
         toast({
           title: "Error",
@@ -119,13 +142,14 @@ export const useMediaPlayer = (
         setIsLoading(false);
       }
     };
+
     fetchStream();
-  }, [isCustomSource, id, mediaType, season, episode, toast]);
+  }, [selectedSource, id, mediaType, season, episode, sources, toast]);
 
   const updateIframeUrl = useCallback((mediaId: number, seasonNum?: number, episodeNum?: number) => {
     if (isCustomSource) return;
     
-    const source = videoSources.find(src => src.key === selectedSource);
+    const source = sources.find(src => src.key === selectedSource);
     if (!source) return;
     
     let url;
@@ -139,7 +163,7 @@ export const useMediaPlayer = (
       setIframeUrl(url);
       setIsPlayerLoaded(true);
     }
-  }, [selectedSource, mediaType, isCustomSource]);
+  }, [selectedSource, mediaType, isCustomSource, sources]);
 
   useEffect(() => {
     if (!isPlayerLoaded || !user || !mediaDetails || !id || watchHistoryRecorded.current) return;

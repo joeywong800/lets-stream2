@@ -1,21 +1,19 @@
-import { Check } from 'lucide-react';
+import { Check, Loader2 } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
-import { VideoSource } from '@/utils/types';
 import { useToast } from '@/hooks/use-toast';
 import { useUserPreferences } from '@/hooks/user-preferences';
 import { useAuth } from '@/hooks';
 import { useState } from 'react';
+import { useVideoSources } from '@/utils/video-sources';
 
 interface VideoSourceSelectorProps {
-  videoSources: VideoSource[];
   selectedSource: string;
   onSourceChange: (sourceKey: string) => void;
   isCustomSource: boolean;
 }
 
 const VideoSourceSelector = ({
-  videoSources,
   selectedSource,
   onSourceChange,
   isCustomSource
@@ -24,6 +22,7 @@ const VideoSourceSelector = ({
   const { updatePreferences } = useUserPreferences();
   const { user } = useAuth();
   const [isChanging, setIsChanging] = useState(false);
+  const { sources, loading } = useVideoSources();
 
   const handleSourceChange = async (sourceKey: string) => {
     setIsChanging(true);
@@ -35,7 +34,7 @@ const VideoSourceSelector = ({
       });
     }
     
-    const sourceName = videoSources.find(s => s.key === sourceKey)?.name || 'new source';
+    const sourceName = sources.find(s => s.key === sourceKey)?.name || 'new source';
     toast({
       title: "Source Changed",
       description: `Switched to ${sourceName}`,
@@ -44,6 +43,14 @@ const VideoSourceSelector = ({
     setIsChanging(false);
   };
 
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center w-full h-32">
+        <Loader2 className="w-8 h-8 animate-spin text-white/50" />
+      </div>
+    );
+  }
+
   return (
     <motion.div 
       className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3 md:gap-4"
@@ -51,7 +58,7 @@ const VideoSourceSelector = ({
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.1 }}
     >
-      {videoSources.map((source, index) => (
+      {sources.map((source, index) => (
         <motion.button
           key={source.key}
           onClick={() => handleSourceChange(source.key)}
@@ -69,6 +76,7 @@ const VideoSourceSelector = ({
           transition={{ delay: index * 0.05 }}
           aria-label={`Select ${source.name} video source`}
           aria-pressed={selectedSource === source.key}
+          disabled={isChanging}
         >
           {/* Pulsing border for active state */}
           {selectedSource === source.key && (

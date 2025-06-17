@@ -14,7 +14,7 @@ import { ChatbotProvider } from './contexts/chatbot-context';
 import ChatbotButton from './components/chatbot/ChatbotButton';
 import ChatbotWindow from './components/chatbot/ChatbotWindow';
 import AppRoutes from './routes.tsx';
-// import { initializeProxySystem } from './utils/proxy-sw-registration';
+import { initializeVideoSources } from './utils/video-sources';
 import { trackPageView } from './lib/analytics';
 import './App.css';
 import './styles/notifications.css';
@@ -42,10 +42,14 @@ function AnalyticsWrapper({ children }: { children: React.ReactNode }) {
   return <>{children}</>;
 }
 
-
 function App() {
   const isDevelopment = import.meta.env.DEV;
   const [swUpdateAvailable, setSwUpdateAvailable] = React.useState(false);
+
+  useEffect(() => {
+    // Initialize video sources when app starts
+    initializeVideoSources().catch(console.error);
+  }, []);
 
   // React.useEffect(() => {
   //   // Initialize the proxy system with error handling

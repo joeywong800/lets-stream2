@@ -1,4 +1,3 @@
-
 import { useParams } from 'react-router-dom';
 import { ExternalLink } from 'lucide-react';
 import { motion } from 'framer-motion';
@@ -9,7 +8,6 @@ import VideoSourceSelector from '@/components/player/VideoSourceSelector';
 import EpisodeNavigation from '@/components/player/EpisodeNavigation';
 import MediaActions from '@/components/player/MediaActions';
 import { useMediaPlayer } from '@/hooks/use-media-player';
-import { videoSources } from '@/utils/video-sources';
 import { useAuth } from '@/hooks';
 
 const Player = () => {
@@ -121,7 +119,6 @@ const Player = () => {
             </div>
 
             <VideoSourceSelector 
-              videoSources={videoSources}
               selectedSource={selectedSource}
               onSourceChange={handleSourceChange}
               isCustomSource={isCustomSource}

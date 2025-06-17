@@ -1,3 +1,31 @@
+// Stream response types
+export interface StreamHeaders {
+  [key: string]: string;
+}
+
+export interface StreamSubtitle {
+  language: string;
+  label: string;
+  type?: string;
+  uri?: string;
+  lang?: string;
+  file?: string;
+}
+
+export interface StreamResponse {
+  url: string | null;
+  headers: StreamHeaders | null;
+  subtitles: StreamSubtitle[] | null;
+}
+
+// Video source types
+export interface VideoSource {
+  key: string;
+  name: string;
+  getMovieUrl: (id: number) => Promise<StreamResponse | null> | string;
+  getTVUrl: (id: number, season: number, episode: number) => Promise<StreamResponse | null> | string;
+}
+
 // Media types for basic movie and TV show data
 export interface Media {
   id: number;
@@ -135,14 +163,6 @@ export interface CustomVideoSourceResult {
     label: string;
     file: string;
   }>;
-}
-
-// Video source interface
-export interface VideoSource {
-  key: string;
-  name: string;
-  getMovieUrl: (id: number) => string | Promise<string> | Promise<CustomVideoSourceResult | string>;
-  getTVUrl: (id: number, season: number, episode: number) => string | Promise<string> | Promise<CustomVideoSourceResult | string>;
 }
 
 // Image response types
