@@ -24,7 +24,7 @@ function createVideoSource(source: JsonVideoSource): VideoSource {
 export async function loadVideoSources(): Promise<VideoSource[]> {
   try {
     console.log('[VideoSourceLoader] Fetching video sources from remote API...');
-    const response = await fetch('https://vd-src-worker.chintanr21.workers.dev/');
+    const response = await fetch('https://vd-src-worker.chintanr21.workers.dev/api');
     const data = await response.json();
     console.log(`[VideoSourceLoader] Received ${data.videoSources?.length || 0} sources from API`);
     const sources = (data.videoSources as JsonVideoSource[]).map(createVideoSource);
